@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="tools,apache," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Apache common提供了很多强大的工具集，简化了Java开发人员的开发。下面是我个人一些使用心得。">
+<meta name="keywords" content="tools,apache">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache Commons类库">
+<meta property="og:url" content="www.google.com/2017/07/20/Apache-Common-Study/index.html">
+<meta property="og:site_name" content="Tango">
+<meta property="og:description" content="Apache common提供了很多强大的工具集，简化了Java开发人员的开发。下面是我个人一些使用心得。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-25T10:39:32.452Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apache Commons类库">
+<meta name="twitter:description" content="Apache common提供了很多强大的工具集，简化了Java开发人员的开发。下面是我个人一些使用心得。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="www.google.com/2017/07/20/Apache-Common-Study/"/>
+
+
+
+
+
+  <title>Apache Commons类库 | Tango</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tango</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">探戈</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="www.google.com/2017/07/20/Apache-Common-Study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="FaderW">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tango">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Apache Commons类库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T19:39:41+00:00">
+                2017-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://commons.apache.org/" target="_blank" rel="noopener">Apache common</a>提供了很多强大的工具集，简化了Java开发人员的开发。下面是我个人一些使用心得。<br><a id="more"></a></p>
+<h3 id="介绍下commons-lang3-jar类库下的一些常用工具集"><a href="#介绍下commons-lang3-jar类库下的一些常用工具集" class="headerlink" title="介绍下commons-lang3 jar类库下的一些常用工具集"></a>介绍下<strong>commons-lang3</strong> jar类库下的一些常用工具集</h3><h3 id="RandomStringUtils"><a href="#RandomStringUtils" class="headerlink" title="RandomStringUtils"></a><em>RandomStringUtils</em></h3><blockquote>
+<p>生成随机串</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成随机指定长度的字符串</span></span><br><span class="line">RandomStringUtils.random(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//生成指定字符指定长度的字符串</span></span><br><span class="line">RandomStringUtils.random(<span class="number">4</span>,<span class="keyword">new</span> <span class="keyword">char</span>[]&#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>&#125;);</span><br><span class="line"><span class="comment">//生成指定长度的数字字符串</span></span><br><span class="line">RandomStringUtils.randomNumeric(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//生成自定长度的Alpha字母串（a-z,A-Z）</span></span><br><span class="line">RandomStringUtils.randomAlphabetic(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//生成指定长度的Alpha字母或数字串（a-z,A-z,0-9）</span></span><br><span class="line">RandomStringUtils.randomAlphanumeric(<span class="number">4</span>);</span><br><span class="line"><span class="comment">//获取指定长度的Ascii值在（32-126）的字符串</span></span><br><span class="line">RandomStringUtils.randomAscii(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="StringUtils"><a href="#StringUtils" class="headerlink" title="StringUtils"></a><em>StringUtils</em></h3><blockquote>
+<p>非空判断</p>
+</blockquote>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//判断是否为<span class="literal">null</span>或<span class="string">""</span></span><br><span class="line">StringUtils.isNotEmpty(<span class="string">""</span>)<span class="comment">;</span></span><br><span class="line">//判断是否为<span class="literal">null</span>或者<span class="string">""</span>(去空格)</span><br><span class="line">StringUtils.isNotBlank(<span class="string">" "</span>)<span class="comment">;</span></span><br><span class="line">//将<span class="literal">null</span>或<span class="string">" "</span>转换为<span class="string">""</span>(空串)</span><br><span class="line">StringUtils.trimToEmpty(<span class="string">"  "</span>)<span class="comment">;</span></span><br><span class="line">//将<span class="literal">null</span>或<span class="string">""</span>转换为<span class="literal">null</span></span><br><span class="line">StringUtils.trimToNull(<span class="string">""</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h4 id="StringUtils分装的方法很多，这里就不一一列举，有兴趣可以查看文档"><a href="#StringUtils分装的方法很多，这里就不一一列举，有兴趣可以查看文档" class="headerlink" title="StringUtils分装的方法很多，这里就不一一列举，有兴趣可以查看文档"></a>StringUtils分装的方法很多，这里就不一一列举，有兴趣可以<a href="http://commons.apache.org/" target="_blank" rel="noopener">查看文档</a></h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tools/" rel="tag"><i class="fa fa-tag"></i> tools</a>
+          
+            <a href="/tags/apache/" rel="tag"><i class="fa fa-tag"></i> apache</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/19/echo-server/" rel="prev" title="使用java NIO实现一个echo server">
+                使用java NIO实现一个echo server <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">FaderW</p>
+              <p class="site-description motion-element" itemprop="description">花有重开日，人无再少年</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍下commons-lang3-jar类库下的一些常用工具集"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x4ECB;&#x7ECD;&#x4E0B;commons-lang3-jar&#x7C7B;&#x5E93;&#x4E0B;&#x7684;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x5DE5;&#x5177;&#x96C6;" class="headerlink" title="&#x4ECB;&#x7ECD;&#x4E0B;commons-lang3 jar&#x7C7B;&#x5E93;&#x4E0B;&#x7684;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x5DE5;&#x5177;&#x96C6;"></a>&#x4ECB;&#x7ECD;&#x4E0B;<strong>commons-lang3</strong> jar&#x7C7B;&#x5E93;&#x4E0B;&#x7684;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x5DE5;&#x5177;&#x96C6;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RandomStringUtils"><span class="nav-number">2.</span> <span class="nav-text"><a href="#RandomStringUtils" class="headerlink" title="RandomStringUtils"></a><em>RandomStringUtils</em></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StringUtils"><span class="nav-number">3.</span> <span class="nav-text"><a href="#StringUtils" class="headerlink" title="StringUtils"></a><em>StringUtils</em></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#StringUtils分装的方法很多，这里就不一一列举，有兴趣可以查看文档"><span class="nav-number">3.1.</span> <span class="nav-text"><a href="#StringUtils&#x5206;&#x88C5;&#x7684;&#x65B9;&#x6CD5;&#x5F88;&#x591A;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x4E00;&#x4E00;&#x5217;&#x4E3E;&#xFF0C;&#x6709;&#x5174;&#x8DA3;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x6587;&#x6863;" class="headerlink" title="StringUtils&#x5206;&#x88C5;&#x7684;&#x65B9;&#x6CD5;&#x5F88;&#x591A;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x4E00;&#x4E00;&#x5217;&#x4E3E;&#xFF0C;&#x6709;&#x5174;&#x8DA3;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x6587;&#x6863;"></a>StringUtils&#x5206;&#x88C5;&#x7684;&#x65B9;&#x6CD5;&#x5F88;&#x591A;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x4E00;&#x4E00;&#x5217;&#x4E3E;&#xFF0C;&#x6709;&#x5174;&#x8DA3;&#x53EF;&#x4EE5;<a href="http://commons.apache.org/" target="_blank" rel="noopener">&#x67E5;&#x770B;&#x6587;&#x6863;</a></span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">FaderW</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
