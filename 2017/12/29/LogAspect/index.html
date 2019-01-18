@@ -6,10 +6,10 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="AOP," />
+  <meta name="keywords" content="AOP,">
 
 
 
@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Tango">
 <meta property="og:description" content="如果想要在方法的某个地方输出日志，但是不想要改变原有的代码。这时候可以使用代理、或者切面（原理都是AOP），这里我们使用Aspect切面来实现日志输出。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-29T01:56:16.261Z">
+<meta property="og:updated_time" content="2019-01-18T09:28:58.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用AOP实现日志切入">
 <meta name="twitter:description" content="如果想要在方法的某个地方输出日志，但是不想要改变原有的代码。这时候可以使用代理、或者切面（原理都是AOP），这里我们使用Aspect切面来实现日志输出。">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="www.google.com/2017/12/29/LogAspect/"/>
+  <link rel="canonical" href="www.google.com/2017/12/29/LogAspect/">
 
 
 
@@ -138,7 +138,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -148,13 +148,13 @@
   <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Tango</span>
         <span class="logo-line-after"><i></i></span>
@@ -184,7 +184,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -194,7 +194,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -204,7 +204,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -214,7 +214,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -224,7 +224,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -234,7 +234,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
             
             公益404
           </a>
@@ -268,20 +268,20 @@
   
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="www.google.com/2017/12/29/LogAspect/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="FaderW">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Tango">
     </span>
 
@@ -313,7 +313,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -324,7 +324,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
                   <a href="/categories/Java/" itemprop="url" rel="index">
                     <span itemprop="name">Java</span>
                   </a>
@@ -345,6 +345,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  197
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
           
 
           
@@ -477,7 +508,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">FaderW</p>
               <p class="site-description motion-element" itemprop="description">花有重开日，人无再少年</p>
@@ -490,7 +521,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -512,7 +543,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -555,7 +586,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-Cache注解"><span class="nav-number">1.</span> <span class="nav-text"><a href="#&#x5B9A;&#x4E49;-Cache&#x6CE8;&#x89E3;" class="headerlink" title="&#x5B9A;&#x4E49;@Cache&#x6CE8;&#x89E3;"></a>&#x5B9A;&#x4E49;<code>@Cache</code>&#x6CE8;&#x89E3;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义日志配置类"><span class="nav-number">2.</span> <span class="nav-text"><a href="#&#x5B9A;&#x4E49;&#x65E5;&#x5FD7;&#x914D;&#x7F6E;&#x7C7B;" class="headerlink" title="&#x5B9A;&#x4E49;&#x65E5;&#x5FD7;&#x914D;&#x7F6E;&#x7C7B;"></a>&#x5B9A;&#x4E49;&#x65E5;&#x5FD7;&#x914D;&#x7F6E;&#x7C7B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义People接口与Man实现类"><span class="nav-number">3.</span> <span class="nav-text"><a href="#&#x5B9A;&#x4E49;People&#x63A5;&#x53E3;&#x4E0E;Man&#x5B9E;&#x73B0;&#x7C7B;" class="headerlink" title="&#x5B9A;&#x4E49;People&#x63A5;&#x53E3;&#x4E0E;Man&#x5B9E;&#x73B0;&#x7C7B;"></a>&#x5B9A;&#x4E49;People&#x63A5;&#x53E3;&#x4E0E;Man&#x5B9E;&#x73B0;&#x7C7B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义日志切面类"><span class="nav-number">4.</span> <span class="nav-text"><a href="#&#x5B9A;&#x4E49;&#x65E5;&#x5FD7;&#x5207;&#x9762;&#x7C7B;" class="headerlink" title="&#x5B9A;&#x4E49;&#x65E5;&#x5FD7;&#x5207;&#x9762;&#x7C7B;"></a>&#x5B9A;&#x4E49;&#x65E5;&#x5FD7;&#x5207;&#x9762;&#x7C7B;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试运行结果"><span class="nav-number">5.</span> <span class="nav-text"><a href="#&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;&#x7ED3;&#x679C;" class="headerlink" title="&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;&#x7ED3;&#x679C;"></a>&#x6D4B;&#x8BD5;&#x8FD0;&#x884C;&#x7ED3;&#x679C;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-Cache注解"><span class="nav-number">1.</span> <span class="nav-text">定义@Cache注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义日志配置类"><span class="nav-number">2.</span> <span class="nav-text">定义日志配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义People接口与Man实现类"><span class="nav-number">3.</span> <span class="nav-text">定义People接口与Man实现类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义日志切面类"><span class="nav-number">4.</span> <span class="nav-text">定义日志切面类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试运行结果"><span class="nav-number">5.</span> <span class="nav-text">测试运行结果</span></a></li></ol></div>
             
 
           </div>
@@ -575,12 +606,21 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">FaderW</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">4.4k</span>
   
 </div>
 
