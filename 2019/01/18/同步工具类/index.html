@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="[TOC] 闭锁CountDownLatch 闭锁是一种同步工具类，可以延迟线程的进度直到其到达终止状态。  CountDownLatch是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。CountDownLatch内部包含一个计数器，初始化时传入一个正数，表示当前需要等待的事件数量。每次完成一个事件，调用countDown递减计数器。await方法阻塞到计数器变为0。 示例123456">
+<meta name="description" content="CountDownLatch是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。">
 <meta name="keywords" content="concurrent">
 <meta property="og:type" content="article">
 <meta property="og:title" content="同步工具类">
 <meta property="og:url" content="www.google.com/2019/01/18/同步工具类/index.html">
 <meta property="og:site_name" content="Tango">
-<meta property="og:description" content="[TOC] 闭锁CountDownLatch 闭锁是一种同步工具类，可以延迟线程的进度直到其到达终止状态。  CountDownLatch是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。CountDownLatch内部包含一个计数器，初始化时传入一个正数，表示当前需要等待的事件数量。每次完成一个事件，调用countDown递减计数器。await方法阻塞到计数器变为0。 示例123456">
+<meta property="og:description" content="CountDownLatch是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-18T09:28:58.188Z">
+<meta property="og:updated_time" content="2019-01-18T09:32:08.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="同步工具类">
-<meta name="twitter:description" content="[TOC] 闭锁CountDownLatch 闭锁是一种同步工具类，可以延迟线程的进度直到其到达终止状态。  CountDownLatch是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。CountDownLatch内部包含一个计数器，初始化时传入一个正数，表示当前需要等待的事件数量。每次完成一个事件，调用countDown递减计数器。await方法阻塞到计数器变为0。 示例123456">
+<meta name="twitter:description" content="CountDownLatch是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。">
 
 
 
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836
+                  835
                 </span>
               
 
@@ -379,6 +379,10 @@
           
 
           
+              <div class="post-description">
+                  CountDownLatch是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。
+              </div>
+          
 
         </div>
       </header>
@@ -393,8 +397,7 @@
       
 
       
-        <p>[TOC]</p>
-<h2 id="闭锁CountDownLatch"><a href="#闭锁CountDownLatch" class="headerlink" title="闭锁CountDownLatch"></a>闭锁CountDownLatch</h2><blockquote>
+        <h2 id="闭锁CountDownLatch"><a href="#闭锁CountDownLatch" class="headerlink" title="闭锁CountDownLatch"></a>闭锁CountDownLatch</h2><blockquote>
 <p>闭锁是一种同步工具类，可以延迟线程的进度直到其到达终止状态。</p>
 </blockquote>
 <p><code>CountDownLatch</code>是一种灵活的闭锁，它可以始一个或多个线程等待一组事件的发生。<code>CountDownLatch</code>内部包含一个计数器，初始化时传入一个正数，表示当前需要等待的事件数量。每次完成一个事件，调用<code>countDown</code>递减计数器。<code>await</code>方法阻塞到计数器变为0。</p>
