@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="解决Http POST请求request.getInputStream()数据为空的问题">
+<meta name="description" content="post方法 request.getInputStream()为空解惑 前言在SpringMVC web应用中，对于一个rest接口，获取请求参数我们一般使用@requestParam、@requestBody等注解 。对于表单类型的请求参数，有一下几种获取方式  @requestParam注解方式 request.getParameter(String name) request.getInpu">
 <meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="post请求流的使用">
 <meta property="og:url" content="www.google.com/2018/09/21/post请求流的使用/index.html">
 <meta property="og:site_name" content="Tango">
-<meta property="og:description" content="解决Http POST请求request.getInputStream()数据为空的问题">
+<meta property="og:description" content="post方法 request.getInputStream()为空解惑 前言在SpringMVC web应用中，对于一个rest接口，获取请求参数我们一般使用@requestParam、@requestBody等注解 。对于表单类型的请求参数，有一下几种获取方式  @requestParam注解方式 request.getParameter(String name) request.getInpu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-30T08:57:34.608Z">
+<meta property="og:updated_time" content="2019-04-30T09:26:40.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="post请求流的使用">
-<meta name="twitter:description" content="解决Http POST请求request.getInputStream()数据为空的问题">
+<meta name="twitter:description" content="post方法 request.getInputStream()为空解惑 前言在SpringMVC web应用中，对于一个rest接口，获取请求参数我们一般使用@requestParam、@requestBody等注解 。对于表单类型的请求参数，有一下几种获取方式  @requestParam注解方式 request.getParameter(String name) request.getInpu">
 
 
 
@@ -379,10 +379,6 @@
           
 
           
-              <div class="post-description">
-                  解决Http POST请求request.getInputStream()数据为空的问题
-              </div>
-          
 
         </div>
       </header>
@@ -434,6 +430,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  http://127.0.0.1:9003/home \</span><br><span class="line">  -H 'Cache-Control: no-cache' \</span><br><span class="line">  -H 'Content-Type: application/x-www-form-urlencoded' \</span><br><span class="line">  -H 'Postman-Token: bb6e680c-5142-4d27-b930-6efb118a505a' \</span><br><span class="line">  -d 'age=20&amp;name=wangyuxin'</span><br></pre></td></tr></table></figure>
 <p>结果</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "data": "age=20&amp;name=wangyuxin"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -552,7 +549,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -574,7 +571,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -651,7 +648,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.4k</span>
+    <span title="Site words total count">4.2k</span>
   
 </div>
 

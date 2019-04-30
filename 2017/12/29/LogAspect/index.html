@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="如果想要在方法的某个地方输出日志，但是不想要改变原有的代码。这时候可以使用代理、或者切面（原理都是AOP），这里我们使用Aspect切面来实现日志输出。">
+<meta name="description" content="在Spring中大量的用到了AOP,比如@Transactional.这里我们写一个简单的Demo,使用AOP实现日志的切入。">
 <meta name="keywords" content="AOP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用AOP实现日志切入">
 <meta property="og:url" content="www.google.com/2017/12/29/LogAspect/index.html">
 <meta property="og:site_name" content="Tango">
-<meta property="og:description" content="如果想要在方法的某个地方输出日志，但是不想要改变原有的代码。这时候可以使用代理、或者切面（原理都是AOP），这里我们使用Aspect切面来实现日志输出。">
+<meta property="og:description" content="在Spring中大量的用到了AOP,比如@Transactional.这里我们写一个简单的Demo,使用AOP实现日志的切入。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-30T08:57:34.608Z">
+<meta property="og:updated_time" content="2019-04-30T09:26:40.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用AOP实现日志切入">
-<meta name="twitter:description" content="如果想要在方法的某个地方输出日志，但是不想要改变原有的代码。这时候可以使用代理、或者切面（原理都是AOP），这里我们使用Aspect切面来实现日志输出。">
+<meta name="twitter:description" content="在Spring中大量的用到了AOP,比如@Transactional.这里我们写一个简单的Demo,使用AOP实现日志的切入。">
 
 
 
@@ -356,7 +356,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  197
+                  230
                 </span>
               
 
@@ -379,10 +379,6 @@
           
 
           
-              <div class="post-description">
-                  如果想要在方法的某个地方输出日志，但是不想要改变原有的代码。这时候可以使用代理、或者切面（原理都是AOP），这里我们使用Aspect切面来实现日志输出。
-              </div>
-          
 
         </div>
       </header>
@@ -397,7 +393,8 @@
       
 
       
-        <h4 id="定义-Cache注解"><a href="#定义-Cache注解" class="headerlink" title="定义@Cache注解"></a>定义<code>@Cache</code>注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Cache &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>在Spring中大量的用到了AOP,比如@Transactional.这里我们写一个简单的Demo,使用AOP实现日志的切入。<br><a id="more"></a></p>
+<h4 id="定义-Cache注解"><a href="#定义-Cache注解" class="headerlink" title="定义@Cache注解"></a>定义<code>@Cache</code>注解</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Cache &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="定义日志配置类"><a href="#定义日志配置类" class="headerlink" title="定义日志配置类"></a>定义日志配置类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span>(proxyTargetClass = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeopleConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="定义People接口与Man实现类"><a href="#定义People接口与Man实现类" class="headerlink" title="定义People接口与Man实现类"></a>定义People接口与Man实现类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">People</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">     * say hello</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sayHello</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Man</span> <span class="keyword">implements</span> <span class="title">People</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Cache</span>(<span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello, I am Man, My name is : "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="定义日志切面类"><a href="#定义日志切面类" class="headerlink" title="定义日志切面类"></a>定义日志切面类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">1000</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogAspect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义切入点,使用Cache注解的方法</span></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"@annotation(Cache)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">cache</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义环绕通知</span></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"cache()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">private</span> Object <span class="title">logAround</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        Object args = proceedingJoinPoint.getArgs();</span><br><span class="line">        System.out.println(<span class="string">"args:"</span> + JSONObject.toJSONString(args));</span><br><span class="line">        <span class="keyword">return</span> proceedingJoinPoint.proceed();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext(PeopleConfig.class);</span><br><span class="line">        Man man = applicationContext.getBean(<span class="string">"man"</span>, Man.class);</span><br><span class="line">        man.sayHello(<span class="string">"FaderWang"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -521,7 +518,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -543,7 +540,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -620,7 +617,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.4k</span>
+    <span title="Site words total count">4.2k</span>
   
 </div>
 
