@@ -26,7 +26,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/favicon.ico">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -102,6 +102,10 @@
     
     
     
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
 
 
 <link rel="stylesheet" href="/css/style.css">
@@ -172,6 +176,12 @@
 
     <div class="card">
     
+    <div class="card-image">
+        <a href="/2019/07/11/spring-ioc/" class="image is-7by1">
+            <img class="thumbnail" src="/thumbnails/picjumbo.jpg" alt="Spring源码解析之IoC(一)">
+        </a>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -186,7 +196,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    23 分钟 读完 (大约 3458 个字)
+                    24 分钟 读完 (大约 3540 个字)
                 </span>
                 
                 
@@ -199,8 +209,8 @@
             
         </h1>
         <div class="content">
-            <p>IOC、AOP是Spring的两大核心，通过IOC(依赖注入)，Spring容器为我们管理程序中的java bean，省去了开发人员很多繁琐工作。</p>
-<h2 id="BeanFactory和ApplicationContext"><a href="#BeanFactory和ApplicationContext" class="headerlink" title="BeanFactory和ApplicationContext"></a>BeanFactory和ApplicationContext</h2><p>在Spring IOC容器设计中，分为了两个主要的容器系列，<code>BeanFactory</code>的简单容器系列以及<code>ApplicationContext</code>应用上下文的高级容器系列。而<code>BeanFactory</code>作为所有容器的基类，定义了<code>getBean()</code>等最基本的方法，抽象出容器的概念。<br></p>
+            <blockquote>
+<p>IOC、AOP是Spring的两大核心，通过IOC(依赖注入)，Spring容器为我们管理程序中的java bean，省去了开发人员很多繁琐工作。研究Spring的源码有助于我们更深入的理解一些编程思想。但是Spring的IOC源码比较复杂（复杂并不是难），看起来需要有很大的耐心，本文就让我们一步步耐心的来做分析。<br></p></blockquote>
         </div>
         
         
@@ -350,7 +360,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1282 个字)
+                    9 分钟 读完 (大约 1367 个字)
                 </span>
                 
                 
@@ -359,17 +369,12 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/08/25/Venus/">Venus</a>
+                <a class="has-link-black-ter" href="/2018/08/25/Venus/">轻量级爬虫框架Venus</a>
             
         </h1>
         <div class="content">
-            <h2 id="轻量级爬虫框架Venus"><a href="#轻量级爬虫框架Venus" class="headerlink" title="轻量级爬虫框架Venus"></a>轻量级爬虫框架Venus</h2><h3 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h3><ul>
-<li><strong>Downloader</strong>(网页下载器)</li>
-<li><strong>Spider</strong>(爬虫处理器)</li>
-<li><strong>Scheduler</strong>(调度器)</li>
-<li><strong>Parser</strong>(网页解析器)</li>
-<li><strong>Pipline</strong>(数据处理器)</li>
-<li><strong>Engine</strong>(流转引擎)</li></ul>
+            <blockquote>
+<p>有时候我们需要爬虫做一些小事情，比如爬取图片、下载资源等。这些工作很多步骤都是重复的，我们可以将它们抽取出来，写成公共组件。<br>所以就有了该文的轻量级爬虫框架——Venus，基于组件的形式，可扩展。<br></p></blockquote>
         </div>
         
         
@@ -460,7 +465,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 635 个字)
+                    4 分钟 读完 (大约 642 个字)
                 </span>
                 
                 
@@ -473,7 +478,8 @@
             
         </h1>
         <div class="content">
-            <p>Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API。<br></p>
+            <blockquote>
+<p>Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API，提高并发性能。<br></p></blockquote>
         </div>
         
         
@@ -513,7 +519,7 @@
             <div class="level-item has-text-centered" style="flex-shrink: 1">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="https://ws1.sinaimg.cn/large/e3ea9f2dgy1g54537wz85j20qo0k00tg.jpg" alt="YX · Wang">
+                        <img class="image is-128x128 has-mb-6" src="https://ws1.sinaimg.cn/large/e3ea9f2dgy1g54xy72z91j23uw2klhdv.jpg" alt="YX · Wang">
                     
                     
                     <p class="is-size-4 is-block">
@@ -639,20 +645,6 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/concurrent/" style="font-size: 10px;">concurrent</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
-    </div>
-</div>
-
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
-        
-            
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
             最新文章
         </h3>
         
@@ -660,7 +652,7 @@
             
             <a href="/2019/07/11/spring-ioc/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring源码解析之IoC(一)">
+                    <img class="thumbnail" src="/thumbnails/picjumbo.jpg" alt="Spring源码解析之IoC(一)">
                 </p>
             </a>
             
@@ -717,14 +709,14 @@
             
             <a href="/2018/08/25/Venus/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Venus">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="轻量级爬虫框架Venus">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-25T21:35:39.000Z">2018-08-25</time></div>
-                    <a href="/2018/08/25/Venus/" class="has-link-black-ter is-size-6">Venus</a>
+                    <a href="/2018/08/25/Venus/" class="has-link-black-ter is-size-6">轻量级爬虫框架Venus</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Java/">Java</a>
                     </p>
@@ -754,74 +746,20 @@
     </div>
 </div>
 
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
         
-            <div class="card widget">
+            
+<div class="card widget">
     <div class="card-content">
-        <div class="menu">
         <h3 class="menu-label">
-            归档
+            标签云
         </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/concurrent/" style="font-size: 10px;">concurrent</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
 </div>
+
         
             <div class="card widget">
     <div class="card-content">
@@ -888,6 +826,74 @@
                 </div>
                 
             </div>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
         </div>
     </div>
 </div>
@@ -910,175 +916,12 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            最新文章
+            标签云
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/07/11/spring-ioc/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring源码解析之IoC(一)">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-11T16:41:50.000Z">2019-07-11</time></div>
-                    <a href="/2019/07/11/spring-ioc/" class="has-link-black-ter is-size-6">Spring源码解析之IoC(一)</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/01/18/同步工具类/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="同步工具类">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-18T16:32:41.000Z">2019-01-18</time></div>
-                    <a href="/2019/01/18/同步工具类/" class="has-link-black-ter is-size-6">同步工具类</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/09/21/post请求流的使用/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="post请求流的使用">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-21T14:01:50.000Z">2018-09-21</time></div>
-                    <a href="/2018/09/21/post请求流的使用/" class="has-link-black-ter is-size-6">post请求流的使用</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/08/25/Venus/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Venus">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-25T21:35:39.000Z">2018-08-25</time></div>
-                    <a href="/2018/08/25/Venus/" class="has-link-black-ter is-size-6">Venus</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2017/12/29/LogAspect/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="使用AOP实现日志切入">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2017-12-29T15:24:18.000Z">2017-12-29</time></div>
-                    <a href="/2017/12/29/LogAspect/" class="has-link-black-ter is-size-6">使用AOP实现日志切入</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/concurrent/" style="font-size: 10px;">concurrent</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
 </div>
 
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
     
         <div class="card widget">
     <div class="card-content">
@@ -1145,6 +988,74 @@
                 </div>
                 
             </div>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
         </div>
     </div>
 </div>
@@ -1170,7 +1081,12 @@
                 <p class="is-size-7">
                 &copy; 2019 FaderW&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
-                
+                <!-- 
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                 -->
                 </p>
             </div>
             <div class="level-end">
@@ -1301,6 +1217,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     
+    
+
     
 
 

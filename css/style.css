@@ -2,7 +2,7 @@
  *       Override CSS Framework
  * --------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 12px;
 }
 body {
   background-color: #f7f7f7;
@@ -13,6 +13,13 @@ input,
 select,
 textarea {
   font-family: "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
+}
+button {
+  font-family: "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei", sans-serif;
+  background-color: #00a99d;
+}
+a {
+  color: #00a99d;
 }
 @media screen and (min-width: 1280px) {
   .is-1-column .container,
@@ -51,11 +58,12 @@ textarea {
   }
 }
 .tag.is-grey {
-  background: #e7e7e7;
+  background: #00a99d;
 }
 .card {
+  background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05), 0 0 1px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px #fff, 0 0 1px #fff;
 }
 .card + .card,
 .card + .column-right-shadow {
@@ -126,6 +134,7 @@ img.thumbnail {
 }
 .footer {
   background: #fff;
+  box-shadow: 0 4px 10px #fff;
 }
 .footer .field .button {
   background: transparent;
@@ -205,6 +214,13 @@ img.thumbnail {
   max-width: 50%;
   font-size: 1.15rem;
   position: relative;
+}
+.article .post-copyright {
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+  border-left: 3px solid #00a99d;
+  background-color: rgba(255,147,87,0);
+  list-style: none;
 }
 .rtl {
   direction: rtl;
@@ -328,13 +344,13 @@ img.thumbnail {
 }
 .has-link-grey:hover,
 .has-link-black-ter:hover {
-  color: #3273dc !important;
+  color: #00a99d !important;
 }
 .has-link-grey {
-  color: #7a7a7a !important;
+  color: #00a99d !important;
 }
 .has-link-black-ter {
-  color: #242424 !important;
+  color: #00a99d !important;
 }
 @media screen and (max-width: 768px) {
   .has-text-centered-mobile {
@@ -436,7 +452,7 @@ figure.highlight figcaption span {
 }
 figure.highlight figcaption a {
   float: right;
-  color: #9a9a9a;
+  color: #00a99d;
 }
 figure.highlight .gutter {
   text-align: right;

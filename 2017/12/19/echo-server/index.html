@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API。">
+    <meta name="description" content="Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API，提高并发性能。">
 <meta name="keywords" content="NIO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用java NIO实现一个echo server">
 <meta property="og:url" content="www.google.com/2017/12/19/echo-server/index.html">
 <meta property="og:site_name" content="Tango">
-<meta property="og:description" content="Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API。">
+<meta property="og:description" content="Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API，提高并发性能。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/images/og_image.png">
-<meta property="og:updated_time" content="2019-07-19T01:52:21.199Z">
+<meta property="og:updated_time" content="2019-07-19T04:00:28.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用java NIO实现一个echo server">
-<meta name="twitter:description" content="Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API。">
+<meta name="twitter:description" content="Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API，提高并发性能。">
 <meta name="twitter:image" content="/images/og_image.png">
 
 
@@ -28,7 +28,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/favicon.ico">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -104,6 +104,10 @@
     
     
     
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+    
 
 
 <link rel="stylesheet" href="/css/style.css">
@@ -176,9 +180,14 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 635 个字)
+                    4 分钟 读完 (大约 642 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
@@ -189,8 +198,10 @@
             
         </h1>
         <div class="content">
-            <p>Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API。<br><a id="more"></a></p>
-<h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><figure class="highlight java hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> Selector selector;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> SocketChannel socketChannel;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 服务器地址</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> String hostIp;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 监听端口</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> listenPort;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Client</span><span class="hljs-params">(String hostIp, <span class="hljs-keyword">int</span> listenPort)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.hostIp = hostIp;</span><br><span class="line">        <span class="hljs-keyword">this</span>.listenPort = listenPort;</span><br><span class="line">        initialize();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initialize</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//开启监听通道，设置为非阻塞模式</span></span><br><span class="line">        socketChannel = SocketChannel.open(<span class="hljs-keyword">new</span> InetSocketAddress(hostIp, listenPort));</span><br><span class="line">        socketChannel.configureBlocking(<span class="hljs-keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//打开选择器，并注册通道</span></span><br><span class="line">        selector = Selector.open();</span><br><span class="line">        socketChannel.register(selector, SelectionKey.OP_READ);</span><br><span class="line"></span><br><span class="line">        ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">        executorService.submit(() -&gt; &#123;</span><br><span class="line">            <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">                <span class="hljs-keyword">while</span> (selector.select() &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                    Iterator&lt;SelectionKey&gt; keyIterator = selector.selectedKeys().iterator();</span><br><span class="line">                    <span class="hljs-keyword">while</span> (keyIterator.hasNext()) &#123;</span><br><span class="line">                        SelectionKey key = keyIterator.next();</span><br><span class="line">                        <span class="hljs-keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                            SocketChannel channel = (SocketChannel) key.channel();</span><br><span class="line">                            ByteBuffer byteBuffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">                            channel.read(byteBuffer);</span><br><span class="line">                            byteBuffer.flip();</span><br><span class="line"></span><br><span class="line">                            String receive = Charset.forName(<span class="hljs-string">"UTF-8"</span>).newDecoder().decode(byteBuffer).toString();</span><br><span class="line">                            System.out.println(<span class="hljs-string">"接收到来自服务器的消息："</span> + receive);</span><br><span class="line">                            System.out.println(<span class="hljs-string">"服务器地址："</span> + channel.socket().getRemoteSocketAddress());</span><br><span class="line">                            key.interestOps(SelectionKey.OP_READ);</span><br><span class="line">                        &#125;</span><br><span class="line">                        keyIterator.remove();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMsg</span><span class="hljs-params">(String message)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ByteBuffer byteBuffer = ByteBuffer.wrap(message.getBytes(<span class="hljs-string">"UTF-8"</span>));</span><br><span class="line">        socketChannel.write(byteBuffer);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Client client = <span class="hljs-keyword">new</span> Client(<span class="hljs-string">"192.168.5.111"</span>, <span class="hljs-number">1978</span>);</span><br><span class="line">        client.sendMsg(<span class="hljs-string">"你好NIO, I am FaderWang"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+            <blockquote>
+<p>Java NIO可以让你非阻塞的使用IO，从而可以代替原有的IO API，提高并发性能。<br><a id="more"></a></p>
+<h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3></blockquote>
+<figure class="highlight java hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> Selector selector;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> SocketChannel socketChannel;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 服务器地址</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> String hostIp;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 监听端口</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> listenPort;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Client</span><span class="hljs-params">(String hostIp, <span class="hljs-keyword">int</span> listenPort)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.hostIp = hostIp;</span><br><span class="line">        <span class="hljs-keyword">this</span>.listenPort = listenPort;</span><br><span class="line">        initialize();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initialize</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//开启监听通道，设置为非阻塞模式</span></span><br><span class="line">        socketChannel = SocketChannel.open(<span class="hljs-keyword">new</span> InetSocketAddress(hostIp, listenPort));</span><br><span class="line">        socketChannel.configureBlocking(<span class="hljs-keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//打开选择器，并注册通道</span></span><br><span class="line">        selector = Selector.open();</span><br><span class="line">        socketChannel.register(selector, SelectionKey.OP_READ);</span><br><span class="line"></span><br><span class="line">        ExecutorService executorService = Executors.newSingleThreadExecutor();</span><br><span class="line">        executorService.submit(() -&gt; &#123;</span><br><span class="line">            <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">                <span class="hljs-keyword">while</span> (selector.select() &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                    Iterator&lt;SelectionKey&gt; keyIterator = selector.selectedKeys().iterator();</span><br><span class="line">                    <span class="hljs-keyword">while</span> (keyIterator.hasNext()) &#123;</span><br><span class="line">                        SelectionKey key = keyIterator.next();</span><br><span class="line">                        <span class="hljs-keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                            SocketChannel channel = (SocketChannel) key.channel();</span><br><span class="line">                            ByteBuffer byteBuffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);</span><br><span class="line">                            channel.read(byteBuffer);</span><br><span class="line">                            byteBuffer.flip();</span><br><span class="line"></span><br><span class="line">                            String receive = Charset.forName(<span class="hljs-string">"UTF-8"</span>).newDecoder().decode(byteBuffer).toString();</span><br><span class="line">                            System.out.println(<span class="hljs-string">"接收到来自服务器的消息："</span> + receive);</span><br><span class="line">                            System.out.println(<span class="hljs-string">"服务器地址："</span> + channel.socket().getRemoteSocketAddress());</span><br><span class="line">                            key.interestOps(SelectionKey.OP_READ);</span><br><span class="line">                        &#125;</span><br><span class="line">                        keyIterator.remove();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMsg</span><span class="hljs-params">(String message)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ByteBuffer byteBuffer = ByteBuffer.wrap(message.getBytes(<span class="hljs-string">"UTF-8"</span>));</span><br><span class="line">        socketChannel.write(byteBuffer);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Client client = <span class="hljs-keyword">new</span> Client(<span class="hljs-string">"192.168.5.111"</span>, <span class="hljs-number">1978</span>);</span><br><span class="line">        client.sendMsg(<span class="hljs-string">"你好NIO, I am FaderWang"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="服务端代码"><a href="#服务端代码" class="headerlink" title="服务端代码"></a>服务端代码</h3><figure class="highlight java hljs"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Server</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//缓冲区大小</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BUFFER_SIZE = <span class="hljs-number">1024</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//超时时间</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TIME_OUT = <span class="hljs-number">3000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> ServerSocketChannel serverSocketChannel;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> Selector selector;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 本地监听端口</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> listenPort;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Server</span><span class="hljs-params">(<span class="hljs-keyword">int</span> listenPort)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.listenPort = listenPort;</span><br><span class="line">        initialize();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initialize</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//打开监听通道并绑定端口</span></span><br><span class="line">        serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line">        serverSocketChannel.bind(<span class="hljs-keyword">new</span> InetSocketAddress(listenPort));</span><br><span class="line">        serverSocketChannel.configureBlocking(<span class="hljs-keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//开启选择器并注册通道</span></span><br><span class="line">        selector = Selector.open();</span><br><span class="line">        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//创建一个处理协议实现类</span></span><br><span class="line">        TCPHandler tcpHandler = <span class="hljs-keyword">new</span> TCPHandlerImpl(BUFFER_SIZE);</span><br><span class="line">        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (selector.select(TIME_OUT) == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                System.out.println(<span class="hljs-string">"独自等待"</span>);</span><br><span class="line">                <span class="hljs-keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Iterator&lt;SelectionKey&gt; keyIterator = selector.selectedKeys().iterator();</span><br><span class="line">            <span class="hljs-keyword">while</span> (keyIterator.hasNext()) &#123;</span><br><span class="line">                SelectionKey key = keyIterator.next();</span><br><span class="line">                <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line">                        tcpHandler.handleAccept(key);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                        tcpHandler.handleRead(key);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    keyIterator.remove();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        Server server = <span class="hljs-keyword">new</span> Server(<span class="hljs-number">1978</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="服务端处理类"><a href="#服务端处理类" class="headerlink" title="服务端处理类"></a>服务端处理类</h3><figure class="highlight java hljs"><table><tr><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">TCPHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 处理接收</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handleAccept</span><span class="hljs-params">(SelectionKey key)</span> <span class="hljs-keyword">throws</span> Exception</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 处理写入</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handleWrite</span><span class="hljs-params">(SelectionKey key)</span></span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 处理读出</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handleRead</span><span class="hljs-params">(SelectionKey key)</span> <span class="hljs-keyword">throws</span> IOException</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TCPHandlerImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">TCPHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bufferSize;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TCPHandlerImpl</span><span class="hljs-params">(<span class="hljs-keyword">int</span> bufferSize)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.bufferSize = bufferSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleAccept</span><span class="hljs-params">(SelectionKey key)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SocketChannel socketChannel = ((ServerSocketChannel) key.channel()).accept();</span><br><span class="line">        socketChannel.configureBlocking(<span class="hljs-keyword">false</span>);</span><br><span class="line">        Selector selector = key.selector();</span><br><span class="line">        socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(bufferSize));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleWrite</span><span class="hljs-params">(SelectionKey key)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleRead</span><span class="hljs-params">(SelectionKey key)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        SocketChannel socketChannel = (SocketChannel) key.channel();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//得到缓冲区</span></span><br><span class="line">        ByteBuffer byteBuffer = (ByteBuffer) key.attachment();</span><br><span class="line">        byteBuffer.clear();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (socketChannel.read(byteBuffer) == -<span class="hljs-number">1</span>) &#123;</span><br><span class="line">            socketChannel.close();</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            byteBuffer.flip();</span><br><span class="line">            String receive = Charset.forName(<span class="hljs-string">"UTF-8"</span>).newDecoder().decode(byteBuffer).toString();</span><br><span class="line">            System.out.println(<span class="hljs-string">"接收到来自客户端的消息："</span> + receive);</span><br><span class="line">            System.out.println(<span class="hljs-string">"客户端地址："</span> + socketChannel.socket().getRemoteSocketAddress());</span><br><span class="line"></span><br><span class="line">            String send = <span class="hljs-string">"你好，客户端"</span> + <span class="hljs-keyword">new</span> Date().toString() + <span class="hljs-string">",已收到你的消息"</span>;</span><br><span class="line">            byteBuffer = ByteBuffer.wrap(send.getBytes(<span class="hljs-string">"UTF-8"</span>));</span><br><span class="line">            socketChannel.write(byteBuffer);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment">//设置为下一次读取或写入做准备</span></span><br><span class="line">            key.interestOps(SelectionKey.OP_READ);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -283,7 +294,7 @@
             <div class="level-item has-text-centered" style="flex-shrink: 1">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="https://ws1.sinaimg.cn/large/e3ea9f2dgy1g54537wz85j20qo0k00tg.jpg" alt="YX · Wang">
+                        <img class="image is-128x128 has-mb-6" src="https://ws1.sinaimg.cn/large/e3ea9f2dgy1g54xy72z91j23uw2klhdv.jpg" alt="YX · Wang">
                     
                     
                     <p class="is-size-4 is-block">
@@ -409,20 +420,6 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/concurrent/" style="font-size: 10px;">concurrent</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
-    </div>
-</div>
-
-        
-        
-            <div class="column-right-shadow is-hidden-widescreen is-sticky">
-            
-                
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
             最新文章
         </h3>
         
@@ -430,7 +427,7 @@
             
             <a href="/2019/07/11/spring-ioc/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Spring源码解析之IoC(一)">
+                    <img class="thumbnail" src="/thumbnails/picjumbo.jpg" alt="Spring源码解析之IoC(一)">
                 </p>
             </a>
             
@@ -487,14 +484,14 @@
             
             <a href="/2018/08/25/Venus/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Venus">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="轻量级爬虫框架Venus">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-08-25T21:35:39.000Z">2018-08-25</time></div>
-                    <a href="/2018/08/25/Venus/" class="has-link-black-ter is-size-6">Venus</a>
+                    <a href="/2018/08/25/Venus/" class="has-link-black-ter is-size-6">轻量级爬虫框架Venus</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Java/">Java</a>
                     </p>
@@ -524,74 +521,20 @@
     </div>
 </div>
 
+        
+        
+            <div class="column-right-shadow is-hidden-widescreen is-sticky">
             
-                <div class="card widget">
+                
+<div class="card widget">
     <div class="card-content">
-        <div class="menu">
         <h3 class="menu-label">
-            归档
+            标签云
         </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
+        <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/concurrent/" style="font-size: 10px;">concurrent</a> <a href="/tags/framework/" style="font-size: 10px;">framework</a> <a href="/tags/ioc/" style="font-size: 10px;">ioc</a> <a href="/tags/spider/" style="font-size: 10px;">spider</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a>
     </div>
 </div>
+
             
                 <div class="card widget">
     <div class="card-content">
@@ -662,6 +605,74 @@
     </div>
 </div>
             
+                <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+            
             </div>
         
     </div>
@@ -685,7 +696,12 @@
                 <p class="is-size-7">
                 &copy; 2019 FaderW&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
-                
+                <!-- 
+                <br>
+                <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span>
+                 -->
                 </p>
             </div>
             <div class="level-end">
@@ -816,6 +832,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     
+    
+
     
 
 
